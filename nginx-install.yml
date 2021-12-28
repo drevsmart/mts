@@ -1,0 +1,23 @@
+---
+- name: Установка web-сервера Nginx на всех узлах
+  hosts: t0000alberezn10
+  become_method: sudo
+  become_user: root
+
+  tasks:
+  - name: Создаем файл nginx.repo оригинального репозитория Nginx на узлах
+    copy:
+      content: "[nginx-mainline]\nname=nginx mainline repo\nbaseurl=http://nginx.org/packages/mainline/centos/$releasever/$basearch/\ngpgcheck=1\nenabled=1\ngpgkey=https://nginx.org/keys/nginx_signing.key\nmodule_hotfixes=true"
+      dest: "/etc/yum.repos.d/nginx.repo"
+      backup: yes
+      owner: root
+      group: root
+      mode: 0644
+  - name: Установим Nginx на узлы
+    yum:
+      name: nginx
+      state: latest
+  - name: Запустим Nginx на узлах
+    ansible.builtin.service:
+      name: nginx
+      state: started

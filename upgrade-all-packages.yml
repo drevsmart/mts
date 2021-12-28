@@ -1,0 +1,15 @@
+---
+- name: Обновление всех пакетов на узлах
+  hosts: all
+  environment:
+    http_proxy: http://bproxy.msk.mts.ru:3128
+    https_proxy: http://bproxy.msk.mts.ru:3128
+    no_proxy: localhost 
+  become_method: sudo
+  become_user: root
+
+  tasks:
+  - name: Обновить все пакеты
+    yum:
+      name: '*'
+      state: latest

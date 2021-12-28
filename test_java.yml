@@ -1,0 +1,11 @@
+---
+
+- name: Установка ПО
+  connection: ssh
+  hosts: all
+  tasks:
+  - name: Установка Java
+    yum: 
+      name: java
+  - name: upgrade all packages
+    yum: name=* state=latest

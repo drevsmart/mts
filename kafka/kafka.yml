@@ -1,0 +1,11 @@
+---
+- hosts: kafka_servers 
+  environment:
+    http_proxy: http://bproxy.msk.mts.ru:3128
+    https_proxy: http://bproxy.msk.mts.ru:3128
+    no_proxy: localhost 
+  become: true
+  # become_method: sudo
+  # become_user: root
+  roles:
+    - kafka

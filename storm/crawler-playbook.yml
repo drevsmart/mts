@@ -1,0 +1,29 @@
+---
+
+- hosts: storm_master
+  become: yes
+
+  vars_prompt:
+   - name: "user_password"    
+     prompt: "Enter a password for the stormcrawler user"    
+     private: yes    
+     encrypt: "md5_crypt" #need to have python-passlib installed in local machine before we can use it    
+     confirm: yes    
+     salt_size: 7
+
+  tasks:
+   - name: Create StormCrawler User
+     user:
+      name: stormcrawler
+      shell: /bin/bash
+      groups: storm,sudo
+      password: "{{ user_password }}"
+
+   - name: Install packages
+     apt:
+       pkg:
+         - curl
+         - git
+         - maven
+       state: present
+       update_cache: true

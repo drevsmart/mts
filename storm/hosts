@@ -1,0 +1,6 @@
+[storm_master]
+localhost
+
+[storm_worker]
+localhost
+

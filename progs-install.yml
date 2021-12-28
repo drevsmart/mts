@@ -1,0 +1,32 @@
+---
+- name: Установка полезных программ на всех узлах
+  hosts: all
+  # environment:
+  #   http_proxy: http://bproxy.msk.mts.ru:3128
+  #   https_proxy: http://bproxy.msk.mts.ru:3128
+  #   no_proxy: localhost 
+  become_method: sudo
+  become_user: root
+
+  tasks:
+  - name: Установить группу программ
+    yum:
+      name: "{{ package }}"
+    vars:
+      package:
+      - mc
+      - curl
+      - vim
+      - java
+      - gcc
+      - gcc-c++
+      - kernel-devel
+      - "@Development tools" 
+      - oracle-epel-release-el8.x86_64
+      - tar
+      - maven
+      state: latest
+    environment:
+      http_proxy: http://bproxy.msk.mts.ru:3128
+      https_proxy: http://bproxy.msk.mts.ru:3128
+      no_proxy: localhost 
