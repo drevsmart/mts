@@ -7,5 +7,3 @@
   - name: Установка Java
     yum: 
       name: java
-  - name: upgrade all packages
-    yum: name=* state=latest

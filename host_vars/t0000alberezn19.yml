@@ -1,3 +1,4 @@
 ansible_connection: ssh
 ansible_ssh_user: root
 ansible_ssh_pass: "yZ%5Pd#f"
+ansible_host: 172.16.215.41
