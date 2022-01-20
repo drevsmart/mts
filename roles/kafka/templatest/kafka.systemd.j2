@@ -1,0 +1,11 @@
+[Unit]
+Description=Kafka
+After=network.target
+
+[Service]
+User=kafka
+ExecStart={{ kafka_application_path }}/bin/kafka-server-start.sh {{ kafka_application_path }}/config/server.properties
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
